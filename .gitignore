@@ -1,0 +1,7 @@
+work
+*.vcd
+transcript
+*.wlf
+*.vstf
+*.ucdb
+covhtmlreport
