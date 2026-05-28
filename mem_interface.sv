@@ -1,4 +1,4 @@
-interface mem_if (input logic clk);
+interface mem_if (input logic clk, input logic rst_n);
 	logic mem_sel_en;
 	logic mem_wr_rd_s;
 	logic [7:0] mem_addr;
