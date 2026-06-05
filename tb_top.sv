@@ -5,6 +5,8 @@ import uvm_pkg::*;
 
 import mem_pkg::*;
 
+`include "mem_base_test.sv"
+`include "mem_sanity_test.sv"
 module top;
 
     logic clk;
@@ -45,12 +47,9 @@ module top;
     end
 
     initial begin
-      rst_n = 0;
-
-      #50;
-
-      rst_n = 1;
-   end
+        uvm_config_db #(virtual mem_if)::set(null, "*","vif",mem_if);
+        run_test("mem_sanity_test");
+    end
     
     
 endmodule
