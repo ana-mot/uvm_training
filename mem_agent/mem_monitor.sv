@@ -26,7 +26,8 @@ class mem_monitor extends uvm_monitor;
         mem_transaction tr;
 
         forever begin
-            @(posedge vif.mon_cb.mem_sel_en);
+            @(vif.mon_cb);
+            if(vif.mon_cb.mem_sel_en) begin
                 tr = mem_transaction::type_id::create("tr", this);
                 tr.addr = vif.mon_cb.mem_addr;
 
@@ -65,7 +66,7 @@ class mem_monitor extends uvm_monitor;
                end
 
                 mon_analysis_port.write (tr);
-        
+            end
       end
    endtask
 

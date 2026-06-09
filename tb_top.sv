@@ -47,6 +47,12 @@ module top;
     end
 
     initial begin
+        rst_n = 0;
+        repeat(3) @(posedge clk);
+        rst_n = 1;
+    end
+
+    initial begin
         uvm_config_db #(virtual mem_if)::set(null, "*","vif",mem_if);
         run_test("mem_sanity_test");
     end
