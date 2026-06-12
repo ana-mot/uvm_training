@@ -9,6 +9,7 @@ class mem_agent extends uvm_agent;
 
    function new (string name = "mem_agent", uvm_component parent=null);
       super.new (name, parent);
+      is_active = UVM_ACTIVE;
    endfunction
 
    virtual function void build_phase (uvm_phase phase);
