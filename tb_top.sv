@@ -4,6 +4,8 @@ import uvm_pkg::*;
 `include "uvm_macros.svh"
 
 import mem_pkg::*;
+import in_pkg::*;
+import out_pkg::*;
 
 `include "mem_base_test.sv"
 `include "mem_sanity_test.sv"
@@ -18,8 +20,8 @@ module top;
 
 
     mem_if mem_if (.clk(clk), .rst_n(rst_n));
-    in_if in_if(.clk(clk), .rst_n(rst_n));
-    out_if out_if(.clk(clk), .rst_n(rst_n));
+    in_if in_if (.clk(clk), .rst_n(rst_n));
+    out_if out_if (.clk(clk), .rst_n(rst_n));
 
     switch_top #(.NUM_OF_PORTS(NUM_OF_PORTS),
                 .FIFO_SIZE(FIFO_SIZE),
@@ -54,6 +56,8 @@ module top;
 
     initial begin
         uvm_config_db #(virtual mem_if)::set(null, "*","vif",mem_if);
+        uvm_config_db #(virtual in_if) ::set(null, "*",  "vif", in_if);
+        uvm_config_db #(virtual out_if)::set(null, "*", "vif", out_if);
         run_test("mem_sanity_test");
     end
     
