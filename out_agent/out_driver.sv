@@ -6,12 +6,12 @@ class out_driver extends uvm_driver#(out_transaction);
 		super.new(name,parent);
 	endfunction
 	
-	virtual in_if vif;
+	virtual out_if vif;
 	
 	virtual function void build_phase (uvm_phase phase);
       super.build_phase (phase);
-      if (! uvm_config_db #(virtual in_if) :: get (this, "", "vif", vif)) begin
-         `uvm_error ("NOVIF", {"virtual interface must be set for: ", get_full_name(), ".vif"})
+      if (!uvm_config_db#(virtual out_if)::get(this, "", "out_vif", vif)) begin
+        `uvm_error("NOVIF", {"virtual interface must be set for: ", get_full_name(), ".vif"})
       end
     endfunction
    

@@ -8,5 +8,6 @@ package out_pkg;
     `include "out_driver.sv"
     `include "out_monitor.sv"
     `include "out_agent.sv"
+    `include "out_read_seq.sv"
 endpackage
 

@@ -2,8 +2,12 @@ mem_interface.sv
 in_interface.sv
 out_interface.sv
 mem_agent/mem_package.sv
+<<<<<<< Updated upstream
+=======
 in_agent/in_package.sv
 out_agent/out_package.sv
+scoreboard.sv
+>>>>>>> Stashed changes
 environment.sv
 ../unit-simple-switch-v3-design/source/fifo_module.v
 ../unit-simple-switch-v3-design/source/fsm_module.v
