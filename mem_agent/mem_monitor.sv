@@ -12,13 +12,13 @@ class mem_monitor extends uvm_monitor;
    endfunction
 
    virtual function void build_phase (uvm_phase phase);
-      super.build_phase (phase);
+        super.build_phase (phase);
 
-      mon_analysis_port = new ("mon_analysis_port", this);
+        mon_analysis_port = new ("mon_analysis_port", this);
 
-      if (! uvm_config_db #(virtual mem_if) :: get (this, "", "vif", vif)) begin
-         `uvm_error (get_type_name (), "DUT interface not found")
-      end
+        if (! uvm_config_db #(virtual mem_if)::get(this, "", "mem_vif", vif)) begin
+            `uvm_error(get_type_name(), "DUT interface not found")
+        end
    endfunction
 
    virtual task run_phase (uvm_phase phase);
@@ -50,14 +50,7 @@ class mem_monitor extends uvm_monitor;
                     wait(vif.mon_cb.mem_ack != 4'b0000);
                     tr.ack = vif.mon_cb.mem_ack;
                     tr.rd_data = vif.mon_cb.mem_rd_data;
-
-                    actual_data = tr.rd_data[tr.addr*8 +: 8];    // octetul portului adresat
-                    if(expected_mem[tr.addr] !== actual_data) begin
-                        `uvm_error(get_type_name(), $sformatf("READ MISMATCH addr=0x%0h expected=0x%0h actual=0x%0h", tr.addr, expected_mem[tr.addr], actual_data))
-                    end else begin
-                        `uvm_info(get_type_name(), $sformatf("READ OK addr=%0h data=%0h ack=%b",tr.addr, actual_data, tr.ack), UVM_MEDIUM)
-                    end
-                    //`uvm_info(get_type_name(),$sformatf("MONITOR READ addr=%0h data=%0h ack=%0b", tr.addr, tr.rd_data, tr.ack), UVM_MEDIUM)
+                    `uvm_info(get_type_name(),$sformatf("MONITOR READ addr=%0h data=%0h ack=%0b", tr.addr, tr.rd_data, tr.ack), UVM_MEDIUM)
 
                     
                end

@@ -32,4 +32,13 @@ class in_packet extends uvm_sequence_item;
         foreach (payload[i]) s = {s, $sformatf(" PAYLOAD= %02h", payload[i])};
         return s;
     endfunction
+
+    function void update_parity();
+        parity = da ^ sa ^ length;
+        foreach (payload[i]) parity ^= payload[i];
+    endfunction
+    
+    function void post_randomize();
+        update_parity();
+    endfunction
 endclass
